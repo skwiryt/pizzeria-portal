@@ -1,0 +1,39 @@
+warning " > @testing-library/user-event@12.8.3" has unmet peer dependency "@testing-library/dom@>=7.21.4".
+warning "react-scripts > @typescript-eslint/eslint-plugin > tsutils@3.20.0" has unmet peer dependency "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta".
+success Uninstalled packages.
+
+
+-----------------------------------------------------------------------------------
+po zaninstalowaniu rekomendowanych w pierwszym installu
+
+warning node-sass > request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+[2/4] Fetching packages...
+info fsevents@2.3.2: The platform "linux" is incompatible with this module.
+info "fsevents@2.3.2" is an optional dependency and failed compatibility check. Excluding it from installation.
+info fsevents@1.2.13: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning " > @testing-library/user-event@12.8.3" has unmet peer dependency "@testing-library/dom@>=7.21.4".
+warning "react-scripts > @typescript-eslint/eslint-plugin > tsutils@3.20.0" has unmet peer dependency "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta".
+warning "enzyme-adapter-react-16 > enzyme-adapter-utils@1.14.0" has incorrect peer dependency "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0".
+warning "enzyme-adapter-react-16 > react-test-renderer@16.14.0" has incorrect peer dependency "react@^16.14.0".
+warning "enzyme-adapter-react-16 > enzyme-adapter-utils > airbnb-prop-types@2.16.0" has incorrect peer dependency "react@^0.14 || ^15.0.0 || ^16.0.0-alpha".
+warning " > enzyme-adapter-react-16@1.15.6" has incorrect peer dependency "react@^16.0.0-0".
+warning " > enzyme-adapter-react-16@1.15.6" has incorrect peer dependency "react-dom@^16.0.0-0".
+
+------------------------------------------------------------------------------------
+po odinstalowaniu enzyme-adapter-react-16 wróciło do poprzedniej wersji
+po : yarn add --dev @wojtekmaj/enzyme-adapter-react-17  -  bez zmian
+po drugim rekomendowanym installu (z uwzglendnieniem husky@4.2)  -  bez zmian
+
+------------------------------------------------------------------------------------
+po: yarn add typescript @types/node @types/react @types/react-dom @types/jest
+
+warning Pattern ["@types/react@^17.0.5"] is trying to unpack in the same destination "/home/mzb/.cache/yarn/v6/npm-@types-react-17.0.5-3d887570c4489011f75a3fc8f965bf87d09a1bea-integrity/node_modules/@types/react" as pattern ["@types/react@*","@types/react@*","@types/react@*"]. This could result in non-deterministic behavior, skipping.
+warning Pattern ["@types/jest@^26.0.23"] is trying to unpack in the same destination "/home/mzb/.cache/yarn/v6/npm-@types-jest-26.0.23-a1b7eab3c503b80451d019efb588ec63522ee4e7-integrity/node_modules/@types/jest" as pattern ["@types/jest@*"]. This could result in non-deterministic behavior, skipping.
+info fsevents@2.3.2: The platform "linux" is incompatible with this module.
+info "fsevents@2.3.2" is an optional dependency and failed compatibility check. Excluding it from installation.
+info fsevents@1.2.13: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning " > @testing-library/user-event@12.8.3" has unmet peer dependency "@testing-library/dom@>=7.21.4".
