@@ -37,3 +37,12 @@ info fsevents@1.2.13: The platform "linux" is incompatible with this module.
 info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
 [3/4] Linking dependencies...
 warning " > @testing-library/user-event@12.8.3" has unmet peer dependency "@testing-library/dom@>=7.21.4".
+
+
+-------------------------------------------------------------------------------------
+po instalu yarn add -D eslint-watch
+
+warning " > @testing-library/user-event@12.8.3" has unmet peer dependency "@testing-library/dom@>=7.21.4".
+warning " > eslint-watch@7.0.0" has unmet peer dependency "eslint@>=7 <8.0.0".
+
+
