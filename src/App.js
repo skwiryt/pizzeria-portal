@@ -23,42 +23,13 @@ function App() {
       // secondary: {main: '#11cb5f' },
     },
   });
-  // W BrowserRouter można dać propsa basename={'/panel'} i to zastąpi
-  // kombinację z PUBLIC_URL i homepage w package.json
   
+  // Ten props: basename działa dla wszystkich elementów BrowserRoutera w aplikacji
+  // również dla Linków gdzieś w komponentach.
+  // zmienna PUBLIC_URL zwraca "homePage" z package.json (bez '/'), czyli url, pod którym
+  // są wszyskie katalogi umieszczone przez Webpacka w build.
   return (
-    <BrowserRouter>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <MainLayout>
-            <Switch>
-              <Route exact path={`${process.env.PUBLIC_URL}/`} component={Homepage} />
-              <Route exact path={`${process.env.PUBLIC_URL}/kitchen`} component={Kitchen} />
-              <Route exact path={`${process.env.PUBLIC_URL}/login`} component={Login} />          
-              <Route exact path={`${process.env.PUBLIC_URL}/tables`} component={Tables} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/new`} component={Booking} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/:id`} component={Booking} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/events/new`} component={Events} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/events/:id`} component={Events} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter`} component={Waiter} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/new`} component={Order} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/:id`} component={Order} />
-            </Switch>
-          
-          </MainLayout>    
-        </ThemeProvider>
-       
-      </StylesProvider>
-      
-
-    </BrowserRouter>
-    
-  );
-  
-  // return ( <div>Hi from app.js</div>);
-  /*
-  return (
-    <BrowserRouter basename='/panel'>
+    <BrowserRouter basename={`${process.env.PUBLIC_URL}/`}>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <MainLayout>
@@ -74,18 +45,14 @@ function App() {
               <Route exact path={`/waiter`} component={Waiter} />
               <Route exact path={`/waiter/order/new`} component={Order} />
               <Route exact path={`/waiter/order/:id`} component={Order} />
-            </Switch>
-          
+            </Switch>          
           </MainLayout>    
-        </ThemeProvider>
-       
-      </StylesProvider>
-      
-
+        </ThemeProvider>       
+      </StylesProvider>   
     </BrowserRouter>
     
   );
-  */
+  
 }
 
 export default App;

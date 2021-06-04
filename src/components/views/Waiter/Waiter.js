@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 
 const Waiter = () => (
   <div className={styles.component}>
-    <h2>Waiter view</h2>
-    <Link to={`${process.env.PUBLIC_URL}/waiter/order/new`}>New order</Link>
-    <Link to={`${process.env.PUBLIC_URL}/waiter/order/someId`}>Order of someId</Link>
+    <h2>Waiter view</h2>    
+    <Link to={`/waiter/order/new`}>New order</Link>
+    <Link to={`/waiter/order/someId`}>Order of someId</Link>
 
   </div>
 );

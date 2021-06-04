@@ -127,7 +127,7 @@ export const settings = {
     maxTables: 3,
   },
   db: {
-    url: '//' + window.location.hostname + (window.location.hostname==='localhost' ? ':3131/api' : ''),
+    url: '//' + window.location.hostname + (window.location.hostname==='localhost' ? ':3131/api' : '/api'),
     products: 'products',
     order: 'orders',
     booking: 'booking',
