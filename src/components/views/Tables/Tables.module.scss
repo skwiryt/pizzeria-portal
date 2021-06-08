@@ -1,5 +1,11 @@
 @import '../../../styles/settings.scss';
 
 .component {
-  // padding: $base-size;
+  margin-top: 2 * $base-size;
+}
+.paper {
+  padding: $base-size $base-size 0 $base-size;
+}
+.datepicker {
+  margin-bottom: 2 * $base-size;
 }

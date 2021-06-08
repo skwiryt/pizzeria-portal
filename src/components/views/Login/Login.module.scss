@@ -1,5 +1,8 @@
 @import '../../../styles/settings.scss';
 
 .component {
+  margin-top: 2 * $base-size;
+}
+.paper {
   padding: $base-size;
 }

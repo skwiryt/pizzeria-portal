@@ -15,13 +15,12 @@ const PageNav = () => (
 );
 */
 const PageNav = () => (
-  <nav className={styles.component}>
-    <Button className={styles.link} component={NavLink} to={`/login`} activeClassName='active'>Login</Button>
+  <nav className={styles.component}>   
     <Button className={styles.link} component={NavLink} exact to={`/`} activeClassName='active'>Home</Button>
     <Button className={styles.link} component={NavLink} to={`/kitchen`} activeClassName='active'>Kitchen</Button>
     <Button className={styles.link} component={NavLink} to={`/waiter`} activeClassName='active'>Waiter</Button>
     <Button className={styles.link} component={NavLink} to={`/tables`} activeClassName='active'>Tables</Button>
-    
+    <Button className={styles.link} component={NavLink} to={`/login`} activeClassName='active'>Login</Button>
   </nav>
 );
 
