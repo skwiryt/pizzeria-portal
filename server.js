@@ -24,6 +24,11 @@ server.get(/^\/panel.*/, (req,res) =>{
 });
 
 server.use(function(req, res, next) {
+  //Dopiero te dwie linie zaspokoiły CORS policy chrome
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', '*');
+
   const api = /^\/api(.*)$/.exec(req.url);
 
   if (api && api.length > 1) {
@@ -31,10 +36,17 @@ server.use(function(req, res, next) {
   } else {
     req.url = '/front' + req.url;
   }
+
   next();
 });
 
 server.use(middlewares);
 server.use(router);
-
+/*
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', '*');
+  next();
+});
+*/
 server.listen(port);

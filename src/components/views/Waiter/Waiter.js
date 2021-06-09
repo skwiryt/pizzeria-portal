@@ -1,20 +1,5 @@
-/*
 import React from 'react';
-import styles from './Waiter.module.scss';
-import {Link} from 'react-router-dom';
-
-const Waiter = () => (
-  <div className={styles.component}>
-    <h2>Waiter view</h2>    
-    <Link to={`/waiter/order/new`}>New order</Link>
-    <Link to={`/waiter/order/someId`}>Order of someId</Link>
-
-  </div>
-);
-
-export default Waiter;
-*/
-import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Waiter.module.scss';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,84 +10,115 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 
-const demoContent = [
-  {id: '1', status: 'free', order: null},
-  {id: '2', status: 'thinking', order: null},
-  {id: '3', status: 'ordered', order: 123},
-  {id: '4', status: 'prepared', order: 234},
-  {id: '5', status: 'delivered', order: 345},
-  {id: '6', status: 'paid', order: 456},
-];
-
-const renderActions = status => {
-  switch (status) {
-    case 'free':
-      return (
-        <>
-          <Button>thinking</Button>
-          <Button>new order</Button>
-        </>
-      );
-    case 'thinking':
-      return (
-        <Button>new order</Button>
-      );
-    case 'ordered':
-      return (
-        <Button>prepared</Button>
-      );
-    case 'prepared':
-      return (
-        <Button>delivered</Button>
-      );
-    case 'delivered':
-      return (
-        <Button>paid</Button>
-      );
-    case 'paid':
-      return (
-        <Button>free</Button>
-      );
-    default:
-      return null;
+class Waiter extends React.Component {
+  static propTypes = {
+    tables: PropTypes.array,
+    fetchTables: PropTypes.func,
+    setTable: PropTypes.func,
+    loading: PropTypes.shape({
+      active: PropTypes.bool,
+      error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    }),
   }
-};
 
-const Waiter = () => (
-  <Paper className={styles.component}>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>Table</TableCell>
-          <TableCell>Status</TableCell>
-          <TableCell>Order</TableCell>
-          <TableCell>Action</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {demoContent.map(row => (
-          <TableRow key={row.id}>
-            <TableCell component="th" scope="row">
-              {row.id}
-            </TableCell>
-            <TableCell>
-              {row.status}
-            </TableCell>
-            <TableCell>
-              {row.order && (
-                <Button to={`/waiter/order/${row.order}`} component={Link}>
-                  {row.order}
-                </Button>
-              )}
-            </TableCell>
-            <TableCell>
-              {renderActions(row.status)}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </Paper>
-);
+  componentDidMount(){
+    const { fetchTables } = this.props;
+    fetchTables();
+  }
+  handleStatusChange = (status, tableId, order) => {
+    const { setTable } = this.props;
+    setTable({id: tableId, status, order});
+
+  }
+  renderActions(status, tableId, order){
+    switch (status) {
+      case 'free':
+        return (
+          <>
+            <Button onClick={() => this.handleStatusChange('thinking', tableId, order)}>thinking</Button>
+            <Button onClick={() => this.handleStatusChange('ordered', tableId, order)}>new order</Button>
+          </>
+        );
+      case 'thinking':
+        return (
+          <Button onClick={() => this.handleStatusChange('ordered', tableId, order)}>new order</Button>
+        );
+      case 'ordered':
+        return (
+          <Button onClick={() => this.handleStatusChange('prepared', tableId, order)}>prepared</Button>
+        );
+      case 'prepared':
+        return (
+          <Button onClick={() => this.handleStatusChange('delivered', tableId, order)}>delivered</Button>
+        );
+      case 'delivered':
+        return (
+          <Button onClick={() => this.handleStatusChange('paid', tableId, order)}>paid</Button>
+        );
+      case 'paid':
+        return (
+          <Button onClick={() => this.handleStatusChange('free', tableId, order)}>free</Button>
+        );
+      default:
+        return null;
+    }
+  }
+
+  render() {
+    const { loading: { active, error }, tables } = this.props;
+
+    if((active || !tables.length) && !error) {    
+      return (
+        <Paper className={styles.component}>
+          <p>Loading...</p>
+        </Paper>
+      );
+    } else if(error) {
+      return (
+        <Paper className={styles.component}>
+          <p>Error! Details:</p>
+          <pre>{error}</pre>
+        </Paper>
+      );
+    } else {
+      return (
+        <Paper className={styles.component}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Table</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Order</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tables.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell>
+                    {row.status}
+                  </TableCell>
+                  <TableCell>
+                    {row.order && (
+                      <Button to={`/waiter/order/${row.order}`}  component={Link}>
+                        {row.order}
+                      </Button>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {this.renderActions(row.status, row.id, row.order)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Paper>
+      );
+    }
+  }
+}
 
 export default Waiter;
