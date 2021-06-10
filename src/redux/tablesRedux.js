@@ -36,11 +36,11 @@ export const fetchFromAPI = () => {
       });
   };
 };
-export const sendToAPI = (payload) => {
+export const sendStatusToAPI = (payload) => {
   return (dispatch, getState) => {
     dispatch(requestStarted());
     Axios
-      .put(`${api.url}/api/${api.tables}/${payload.id}`, {status: payload.status, order: payload.order})
+      .patch(`${api.url}/api/${api.tables}/${payload.id}`, {status: payload.status})
       .then((res) => { 
         dispatch(sendSuccess(res.data));
       })
@@ -80,7 +80,7 @@ export default function reducer(statePart = [], action = {}) {
           active: false,
           error: false,
         },
-        data: statePart.data.map(table => table.id === action.payload.id ? action.payload : table),
+        data: statePart.data.map(table => table.id === action.payload.id ? {...table, ...action.payload} : table),
       };
     }
     case REQUEST_ERROR: {

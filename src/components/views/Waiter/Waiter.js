@@ -14,7 +14,7 @@ class Waiter extends React.Component {
   static propTypes = {
     tables: PropTypes.array,
     fetchTables: PropTypes.func,
-    setTable: PropTypes.func,
+    setTableStatus: PropTypes.func,
     loading: PropTypes.shape({
       active: PropTypes.bool,
       error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -25,9 +25,9 @@ class Waiter extends React.Component {
     const { fetchTables } = this.props;
     fetchTables();
   }
-  handleStatusChange = (status, tableId, order) => {
-    const { setTable } = this.props;
-    setTable({id: tableId, status, order});
+  handleStatusChange = (status, tableId) => {
+    const { setTableStatus } = this.props;
+    setTableStatus({id: tableId, status});
 
   }
   renderActions(status, tableId, order){
@@ -35,29 +35,29 @@ class Waiter extends React.Component {
       case 'free':
         return (
           <>
-            <Button onClick={() => this.handleStatusChange('thinking', tableId, order)}>thinking</Button>
-            <Button onClick={() => this.handleStatusChange('ordered', tableId, order)}>new order</Button>
+            <Button onClick={() => this.handleStatusChange('thinking', tableId)}>thinking</Button>
+            <Button onClick={() => this.handleStatusChange('ordered', tableId)}>new order</Button>
           </>
         );
       case 'thinking':
         return (
-          <Button onClick={() => this.handleStatusChange('ordered', tableId, order)}>new order</Button>
+          <Button onClick={() => this.handleStatusChange('ordered', tableId)}>new order</Button>
         );
       case 'ordered':
         return (
-          <Button onClick={() => this.handleStatusChange('prepared', tableId, order)}>prepared</Button>
+          <Button onClick={() => this.handleStatusChange('prepared', tableId)}>prepared</Button>
         );
       case 'prepared':
         return (
-          <Button onClick={() => this.handleStatusChange('delivered', tableId, order)}>delivered</Button>
+          <Button onClick={() => this.handleStatusChange('delivered', tableId)}>delivered</Button>
         );
       case 'delivered':
         return (
-          <Button onClick={() => this.handleStatusChange('paid', tableId, order)}>paid</Button>
+          <Button onClick={() => this.handleStatusChange('paid', tableId)}>paid</Button>
         );
       case 'paid':
         return (
-          <Button onClick={() => this.handleStatusChange('free', tableId, order)}>free</Button>
+          <Button onClick={() => this.handleStatusChange('free', tableId)}>free</Button>
         );
       default:
         return null;
